@@ -8,6 +8,8 @@ import ci553.happyshop.client.picker.PickerController;
 import ci553.happyshop.client.picker.PickerModel;
 import ci553.happyshop.client.picker.PickerView;
 
+import ci553.happyshop.utility.ThemeToggleChanger; // added
+
 import ci553.happyshop.client.warehouse.*;
 import ci553.happyshop.orderManagement.OrderHub;
 import ci553.happyshop.storageAccess.DatabaseRW;
@@ -56,6 +58,8 @@ public class Main extends Application {
 
         startWarehouseClient();
         startWarehouseClient();
+
+        ThemeToggleChanger.openToggleWindow(); // Used to initialise the themetogglechanger class
 
         startEmergencyExit();
     }
