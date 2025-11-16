@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections; // added
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,6 +94,7 @@ public class CustomerModel {
     Changes: A new method (makeOrganisedTrolley) was created.
     Allows an item from the trolley to be organised by merging (duplicated) items together, instead of having multiple lines of the same
     product.
+    Changes: The ability to allow the trolley to be able to sort items in ascending order, e.g. 0001, 0002, 0003 etc.
      */
     void makeOrganisedTrolley(){
         for(Product p: trolley){ // loop created for each product that is already in the trolley
@@ -107,6 +109,7 @@ public class CustomerModel {
         Product pNew = new Product(theProduct.getProductId(), theProduct.getProductDescription(), theProduct.getProductImageName(), theProduct.getUnitPrice(), theProduct.getStockQuantity());
         // changed from theProduct to pNew
         trolley.add(pNew);
+        Collections.sort(trolley); // sorts the trolley by listing the items in ascending order
     }
 
     void checkOut() throws IOException, SQLException {
