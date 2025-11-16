@@ -1,7 +1,10 @@
 package ci553.happyshop.client.emergency;
 
+import ci553.happyshop.utility.ButtonSounds; // added
 import ci553.happyshop.utility.UIStyle;
 import ci553.happyshop.utility.WinPosManager;
+import javafx.animation.PauseTransition; // added
+import javafx.util.Duration; // added
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -33,11 +36,21 @@ public class EmergencyExit {
         ivExit.setFitHeight(WIDTH-100);
         ivExit.setPreserveRatio(true);
 
+    /*
+    Author: Hannah Virgo
+    Changes: Added the ability to call a sound to be played once the exit button is clicked inside the emergency package.
+    Changes: Also includes a pause transition, duration and delay that allows the button to be delayed for 0.7 secs, in order to allow the shutdown.mp3 to be heard without being cut off.
+    */
         Button btnExit = new Button();
         btnExit.setGraphic(ivExit);
         btnExit.setOnAction(event -> {
-            Platform.exit(); // Gracefully exit JavaFX
-            System.exit(0);//forcefully shut down JVM (in case there are non-JavaFX threads)
+            ButtonSounds.play("/Shutdown.mp3");
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.7)); // Allows a delay to happen, in order for the sound to be fully heard before exiting
+            delay.setOnFinished(e -> { // After the pause transition, this triggers the application to exit
+                Platform.exit(); // Gracefully exit JavaFX
+                System.exit(0); // Forcefully shut down JVM (in case there are non-JavaFX threads)
+            });
+            delay.play(); // Calls the delay to come into effect
         });
 
         BorderPane borderPane = new BorderPane();

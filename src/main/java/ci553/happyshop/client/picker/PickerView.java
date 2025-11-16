@@ -1,5 +1,6 @@
 package ci553.happyshop.client.picker;
 
+import ci553.happyshop.utility.ButtonSounds; // added
 import ci553.happyshop.utility.UIStyle;
 import ci553.happyshop.utility.WinPosManager;
 import javafx.event.ActionEvent;
@@ -99,7 +100,13 @@ public class PickerView  {
         return vbOrderDetailsRoot;
     }
 
+    /*
+    Author: Hannah Virgo
+    Changes: Added the ability to call a sound to be played once a button is clicked inside the picker View
+     */
     private void buttonClicked(ActionEvent event) {
+        ButtonSounds.play("/CPWButtonSound.MP3");
+
         Button button = (Button) event.getSource();
         String btnText = button.getText();
         try {

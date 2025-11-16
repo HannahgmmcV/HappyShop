@@ -1,10 +1,8 @@
 package ci553.happyshop.client.warehouse;
 
 import ci553.happyshop.catalogue.Product;
-import ci553.happyshop.utility.StorageLocation;
-import ci553.happyshop.utility.UIStyle;
-import ci553.happyshop.utility.WinPosManager;
-import ci553.happyshop.utility.WindowBounds;
+import ci553.happyshop.utility.ButtonSounds; // added
+import ci553.happyshop.utility.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -467,8 +465,13 @@ public class WarehouseView  {
         btnSubmitEdit.setDisable(disable);
     }
 
-
+    /*
+    Author: Hannah Virgo
+    Changes: Added the ability to call a sound to be played once a button is clicked inside the warehouse View
+     */
     private void buttonClick(ActionEvent event)  {
+        ButtonSounds.play("/CPWButtonSound.MP3");
+
         Button btn= (Button)event.getSource();
         String action = btn.getText();
 

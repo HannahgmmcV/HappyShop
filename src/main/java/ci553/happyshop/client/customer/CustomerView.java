@@ -1,5 +1,6 @@
 package ci553.happyshop.client.customer;
 
+import ci553.happyshop.utility.ButtonSounds; // added
 import ci553.happyshop.utility.UIStyle;
 import ci553.happyshop.utility.WinPosManager;
 import ci553.happyshop.utility.WindowBounds;
@@ -7,6 +8,14 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert; // added
+import javafx.scene.control.Alert.AlertType; // added
+import javafx.scene.control.ButtonType; // added
+import javafx.scene.control.TextArea; // added
+import javafx.scene.control.TextField; // added
+import javafx.scene.control.Label; // added
+import javafx.scene.control.Button; // added
+import java.util.Optional; // added
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +26,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
 
 /**
  * The CustomerView is separated into two sections by a line :
@@ -171,18 +181,47 @@ public class CustomerView  {
     }
 
 
+    /*
+    Author: Hannah Virgo
+    Changes: Added the ability to call a sound to be played once a button is clicked inside the customer View
+    Changes: Created an Alert (Window) for when the user clicks onto checkout, where it will ask them if they're sure that they want to check out their trolley,
+    if yes, they will get a receipt and their items will be processed, but if they press cancel, they will go straight back to their trolley to add more items.
+     */
     private void buttonClicked(ActionEvent event) {
-        try{
-            Button btn = (Button)event.getSource();
+        ButtonSounds.play("/CPWButtonSound.MP3");
+
+        try {
+            Button btn = (Button) event.getSource();
             String action = btn.getText();
-            if(action.equals("Add to Trolley")){
-                showTrolleyOrReceiptPage(vbTrolleyPage); //ensure trolleyPage shows if the last customer did not close their receiptPage
+            if(action.equals("Check Out")) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm Checkout");
+                alert.setHeaderText("Are you sure you want to Checkout your Trolley?");
+                alert.setContentText("Click OK to Checkout, or Cancel to return back to Trolley.");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if(result.isPresent() && result.get() == ButtonType.OK) {
+                    // customer has clicked OK to proceed with checkout
+                    cusController.doAction(action);
+                } else {
+                    // customer has clicked Cancel or closed the window and will go back to the trolley page only
+                    showTrolleyOrReceiptPage(vbTrolleyPage);
+                }
+                return;
             }
-            if(action.equals("OK & Close")){
+
+            // Moved below the alert window to make sure that the receiptPage will only show after the customer has clicked OK to proceed to checkout
+            if(action.equals("Add to Trolley")) {
+                showTrolleyOrReceiptPage(vbTrolleyPage); // ensure trolleyPage shows if the last customer did not close their receiptPage
+            }
+
+            if(action.equals("OK & Close")) {
                 showTrolleyOrReceiptPage(vbTrolleyPage);
             }
+
             cusController.doAction(action);
         }
+
         catch(SQLException e){
             e.printStackTrace();
         } catch (IOException e) {
