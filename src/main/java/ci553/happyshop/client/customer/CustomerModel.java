@@ -70,7 +70,14 @@ public class CustomerModel {
             //TODO
             // 1. Merges items with the same product ID (combining their quantities).
             // 2. Sorts the products in the trolley by product ID.
-            trolley.add(theProduct);
+
+            /*
+            Author Hannah Virgo
+            Changes: Commented out trolley.add(theProduct) and instead replaced it with makeOrganisedTrolley();
+             */
+            // trolley.add(theProduct);
+            makeOrganisedTrolley();
+
             displayTaTrolley = ProductListFormatter.buildString(trolley); //build a String for trolley so that we can show it
         }
         else{
@@ -79,6 +86,27 @@ public class CustomerModel {
         }
         displayTaReceipt=""; // Clear receipt to switch back to trolleyPage (receipt shows only when not empty)
         updateView();
+    }
+
+    /*
+    Author: Hannah Virgo
+    Changes: A new method (makeOrganisedTrolley) was created.
+    Allows an item from the trolley to be organised by merging (duplicated) items together, instead of having multiple lines of the same
+    product.
+     */
+    void makeOrganisedTrolley(){
+        for(Product p: trolley){ // loop created for each product that is already in the trolley
+            // if existing product has the same ID as theProduct,
+            // then increase the existing product's ordered quantity amount
+            if(p.getProductId().equals(theProduct.getProductId())){
+                p.setOrderedQuantity(p.getOrderedQuantity()+ theProduct.getOrderedQuantity());
+                return;
+            }
+        }
+        // this creates a new Product (pNew) with the same ID as theProduct
+        Product pNew = new Product(theProduct.getProductId(), theProduct.getProductDescription(), theProduct.getProductImageName(), theProduct.getUnitPrice(), theProduct.getStockQuantity());
+        // changed from theProduct to pNew
+        trolley.add(pNew);
     }
 
     void checkOut() throws IOException, SQLException {
