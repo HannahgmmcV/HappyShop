@@ -144,7 +144,8 @@ public class WarehouseView  {
         lineContainer.setAlignment(Pos.CENTER);
 
         //top level layout manager
-        HBox hbRoot = new HBox(15, vbSearchPage, lineContainer, vbProductFormPage);
+        // had to delete HBox
+        hbRoot = new HBox(15, vbSearchPage, lineContainer, vbProductFormPage);
         hbRoot.setStyle(UIStyle.rootStyleWarehouse);
 
         Scene scene = new Scene(hbRoot, WIDTH, HEIGHT);

@@ -40,7 +40,8 @@ public class OrderTracker {
         taDisplay.setEditable(false);
         taDisplay.setStyle(UIStyle.textFiledStyle);
 
-        VBox vbox = new VBox(10,laTitle, taDisplay);
+        // had to delete VBox
+        vbox = new VBox(10,laTitle, taDisplay);
         vbox.setAlignment(Pos.TOP_CENTER);
         vbox.setStyle(UIStyle. rootStyleGray);
 
