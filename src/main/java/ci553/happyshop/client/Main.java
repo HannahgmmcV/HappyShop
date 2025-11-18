@@ -59,9 +59,12 @@ public class Main extends Application {
         startWarehouseClient();
         startWarehouseClient();
 
-        ThemeToggleChanger.openToggleWindow(); // Used to initialise the themetogglechanger class
-
         startEmergencyExit();
+
+        // had to comment out as these weren't working
+        //themeToggleChanger.start(new Stage());
+       // ThemeToggleChanger.start(new Stage());
+        ThemeToggleChanger.openToggleWindow(); // Used to initialise the themetogglechanger class
     }
 
     /** The customer GUI -search prodduct, add to trolley, cancel/submit trolley, view receipt
@@ -85,6 +88,8 @@ public class Main extends Application {
         cusModel.databaseRW = databaseRW;
         cusView.start(new Stage());
 
+        cusView.registerWithToggle(); // added this
+
         //RemoveProductNotifier removeProductNotifier = new RemoveProductNotifier();
         //removeProductNotifier.cusView = cusView;
         //cusModel.removeProductNotifier = removeProductNotifier;
@@ -107,6 +112,8 @@ public class Main extends Application {
         pickerModel.pickerView = pickerView;
         pickerModel.registerWithOrderHub();
         pickerView.start(new Stage());
+
+        pickerView.registerWithToggle(); // added this
     }
 
     //The OrderTracker GUI - for customer to track their order's state(Ordered, Progressing, Collected)
@@ -115,6 +122,8 @@ public class Main extends Application {
     private void startOrderTracker(){
         OrderTracker orderTracker = new OrderTracker();
         orderTracker.registerWithOrderHub();
+
+        orderTracker.registerWithToggle(); // added this
     }
 
     //initialize the orderMap<orderId, orderState> for OrderHub during system startup
@@ -145,6 +154,8 @@ public class Main extends Application {
         model.databaseRW = databaseRW;
         view.start(new Stage());
 
+        view.registerWithToggle(); // added this
+
         //create dependent views that need window info
         HistoryWindow historyWindow = new HistoryWindow();
         AlertSimulator alertSimulator = new AlertSimulator();
@@ -159,6 +170,8 @@ public class Main extends Application {
     //starts the EmergencyExit GUI, - used to close the entire application immediatelly
     private void startEmergencyExit(){
         EmergencyExit.getEmergencyExit();
+
+        EmergencyExit.getEmergencyExit().registerWithToggle(); // added this
     }
 }
 

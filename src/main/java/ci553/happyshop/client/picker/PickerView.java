@@ -1,6 +1,7 @@
 package ci553.happyshop.client.picker;
 
 import ci553.happyshop.utility.ButtonSounds; // added
+import ci553.happyshop.utility.ThemeToggleChanger; // added this
 import ci553.happyshop.utility.UIStyle;
 import ci553.happyshop.utility.WinPosManager;
 import javafx.event.ActionEvent;
@@ -31,8 +32,9 @@ public class PickerView  {
     private final int HEIGHT = UIStyle.pickerWinHeight;
 
     private Scene scene;
-    private VBox vbOrderMapRoot;
-    private VBox vbOrderDetailRoot;
+    // changed from private to public
+    public VBox vbOrderMapRoot; // make public
+    public VBox vbOrderDetailRoot; // make public
 
     //Three controllers needs updating when program going on
     private TextArea taOrderMap = new TextArea();
@@ -131,5 +133,9 @@ public class PickerView  {
         taOrderMap.setText(strOrderMap);
         taOrderDetail.setText(strOrderDetail);
         laDetailRootTitle.setText("Progressing Order Details");
+    }
+    // added this
+    public void registerWithToggle(){
+        ThemeToggleChanger.registerPickerView(this);
     }
 }

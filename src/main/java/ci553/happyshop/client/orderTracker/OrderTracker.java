@@ -2,6 +2,7 @@ package ci553.happyshop.client.orderTracker;
 
 import ci553.happyshop.orderManagement.OrderHub;
 import ci553.happyshop.orderManagement.OrderState;
+import ci553.happyshop.utility.ThemeToggleChanger;
 import ci553.happyshop.utility.UIStyle;
 import ci553.happyshop.utility.WinPosManager;
 import javafx.geometry.Pos;
@@ -21,6 +22,8 @@ import java.util.TreeMap;
  */
 
 public class OrderTracker {
+    public VBox vbox; // make public
+
     private final int WIDTH = UIStyle.trackerWinWidth;
     private final int HEIGHT = UIStyle.trackerWinHeight;
 
@@ -81,6 +84,10 @@ public class OrderTracker {
         }
         String textDisplay = sb.toString();
         taDisplay.setText(textDisplay);
+    }
+    // added this
+    public void registerWithToggle(){
+        ThemeToggleChanger.registerOrderTracker(this);
     }
 
 }

@@ -2,6 +2,7 @@ package ci553.happyshop.client.warehouse;
 
 import ci553.happyshop.catalogue.Product;
 import ci553.happyshop.utility.ButtonSounds; // added
+import ci553.happyshop.utility.ThemeToggleChanger; // added this
 import ci553.happyshop.utility.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,6 +62,8 @@ import javafx.scene.input.MouseEvent;
  */
 
 public class WarehouseView  {
+    public HBox hbRoot; // make public
+
     private final int WIDTH = UIStyle.warehouseWinWidth;
     private final int HEIGHT = UIStyle.warehouseWinHeight;
     private final int COLUMN_WIDTH = WIDTH / 2 - 10;
@@ -573,6 +576,11 @@ public class WarehouseView  {
                                 viewWindow.getY(),
                                 viewWindow.getWidth(),
                                 viewWindow.getHeight());
+    }
+
+    // added this
+    public void registerWithToggle(){
+        ThemeToggleChanger.registerWarehouseView(this);
     }
 
     //   //another way to reset the editChild and NewProChild

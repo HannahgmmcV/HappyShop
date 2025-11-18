@@ -1,6 +1,7 @@
 package ci553.happyshop.client.emergency;
 
 import ci553.happyshop.utility.ButtonSounds; // added
+import ci553.happyshop.utility.ThemeToggleChanger; // added
 import ci553.happyshop.utility.UIStyle;
 import ci553.happyshop.utility.WinPosManager;
 import javafx.animation.PauseTransition; // added
@@ -17,6 +18,8 @@ import javafx.stage.Stage;
  * It is a singleton with static access, instantiation is restricted.
  */
 public class EmergencyExit {
+    public BorderPane borderPane= new BorderPane(); // added this
+
     private final int WIDTH = UIStyle.EmergencyExitWinWidth;
     private final int HEIGHT = UIStyle.EmergencyExitWinHeight;
     private static EmergencyExit emergencyExit;
@@ -53,7 +56,8 @@ public class EmergencyExit {
             delay.play(); // Calls the delay to come into effect
         });
 
-        BorderPane borderPane = new BorderPane();
+        // moved uptop, underneath EmergencyExit
+        //BorderPane borderPane = new BorderPane();
         borderPane.setCenter(btnExit);
 
         borderPane.setStyle(UIStyle.rootStyle);
@@ -63,6 +67,10 @@ public class EmergencyExit {
         window.setTitle("🛒 EXIT");
         WinPosManager.registerWindow(window,WIDTH,HEIGHT); //calculate position x and y for this window
         window.show();
+    }
+    // added this
+    public  void registerWithToggle(){
+        ThemeToggleChanger.registerEmergencyExit(this);
     }
 
 }

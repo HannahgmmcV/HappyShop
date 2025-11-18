@@ -1,9 +1,7 @@
 package ci553.happyshop.client.customer;
 
-import ci553.happyshop.utility.ButtonSounds; // added
-import ci553.happyshop.utility.UIStyle;
-import ci553.happyshop.utility.WinPosManager;
-import ci553.happyshop.utility.WindowBounds;
+import ci553.happyshop.utility.ThemeToggleChanger; // added this
+import ci553.happyshop.utility.*;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -43,7 +41,9 @@ public class CustomerView  {
     private final int HEIGHT = UIStyle.customerWinHeight;
     private final int COLUMN_WIDTH = WIDTH / 2 - 10;
 
-    private HBox hbRoot; // Top-level layout manager
+    // make public from private
+    public HBox hbRoot; // Top-level layout manager
+
     private VBox vbTrolleyPage;  //vbTrolleyPage and vbReceiptPage will swap with each other when need
     private VBox vbReceiptPage;
 
@@ -253,5 +253,10 @@ public class CustomerView  {
     WindowBounds getWindowBounds() {
         return new WindowBounds(viewWindow.getX(), viewWindow.getY(),
                   viewWindow.getWidth(), viewWindow.getHeight());
+    }
+
+    // added this
+    public void registerWithToggle(){
+        ThemeToggleChanger.registerCustomerView(this);
     }
 }
