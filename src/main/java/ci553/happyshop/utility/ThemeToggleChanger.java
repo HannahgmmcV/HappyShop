@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 public class ThemeToggleChanger extends Application {
 
+    // Used an arrayList for all the different views to apply the theme changes dynamically
+    // They are all static because they are shared at the class level and not per instance.
     static ArrayList<CustomerView> customerViewlist = new ArrayList<>();
     static ArrayList<PickerView> pickerViewlist = new ArrayList<>();
     static ArrayList<WarehouseView> warehouseViewlist = new ArrayList<>();
@@ -27,15 +29,18 @@ public class ThemeToggleChanger extends Application {
         primaryStage.setTitle("Theme Toggle Window");
         Pane root = new Pane();
 
-        ToggleButton toggle = new ToggleButton("Light"); // initial text
+        // Toggle button is used for switching back and forth between light and dark theme
+        ToggleButton toggle = new ToggleButton("Light");
         toggle.setLayoutX(100);
         toggle.setLayoutY(80);
 
+        // When toggle button is clicked, code will run to switch theme based on its state.
         // Use setOnAction and check isSelected() inside it
         toggle.setOnAction(event -> {
-            if (toggle.isSelected()) {
+            if (toggle.isSelected()) { // if clicked, switch to dark theme.
                 toggle.setText("Dark");
-                System.out.println("Dark mode ON");
+                System.out.println("Dark mode ON"); // logs dark theme is ON
+                //Loop through the views and apply the dark background style to root container
                 // call your method to switch to dark theme
                 for(CustomerView cv: customerViewlist){
                     cv.hbRoot.setStyle("-fx-padding: 8px; " +
@@ -60,10 +65,10 @@ public class ThemeToggleChanger extends Application {
                             "-fx-background-color: black");
                 }
 
-
+            // If toggle button is not clicked, switch to light theme for all views
             } else {
                 toggle.setText("Light");
-                System.out.println("Light mode ON");
+                System.out.println("Light mode ON"); // logs light theme is ON
                 // call your method to switch to light theme
                 for(CustomerView cv: customerViewlist){
                     cv.hbRoot.setStyle(UIStyle.rootStyle);
@@ -84,7 +89,7 @@ public class ThemeToggleChanger extends Application {
             }
         });
 
-        root.getChildren().add(toggle);
+        root.getChildren().add(toggle); // Adds toggle button to the root pane
 
         Scene scene = new Scene(root, 300, 200);
         //scene.getStylesheets().add("dark-theme.css");
@@ -94,6 +99,7 @@ public class ThemeToggleChanger extends Application {
         primaryStage.show();
     }
 
+    // Methods to register the views, in order to enable light/dark theme switching
     public static void registerCustomerView(CustomerView cusView){
         customerViewlist.add(cusView);
     }
@@ -110,11 +116,12 @@ public class ThemeToggleChanger extends Application {
         emergencyExitlist.add(emergencyExit);
     }
 
+    // opens the themetogglechanger from anywhere in the application.
     public static void openToggleWindow() {
         new ThemeToggleChanger().start(new Stage());
     }
 
-    // comment out once theme is complete
+    // Used for testing the Main method independently
     public static void main(String[] args) {
         launch(args);
     }

@@ -22,7 +22,7 @@ import java.util.TreeMap;
  */
 
 public class OrderTracker {
-    public VBox vbox; // make public
+    public VBox vbox; // change from private to public
 
     private final int WIDTH = UIStyle.trackerWinWidth;
     private final int HEIGHT = UIStyle.trackerWinHeight;
@@ -86,7 +86,7 @@ public class OrderTracker {
         String textDisplay = sb.toString();
         taDisplay.setText(textDisplay);
     }
-    // added this
+    // used to register order tracker, so that themetogglechanger can apply changes to it.
     public void registerWithToggle(){
         ThemeToggleChanger.registerOrderTracker(this);
     }

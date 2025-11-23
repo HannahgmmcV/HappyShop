@@ -32,9 +32,10 @@ public class PickerView  {
     private final int HEIGHT = UIStyle.pickerWinHeight;
 
     private Scene scene;
+
     // changed from private to public
-    public VBox vbOrderMapRoot; // make public
-    public VBox vbOrderDetailRoot; // make public
+    public VBox vbOrderMapRoot;
+    public VBox vbOrderDetailRoot;
 
     //Three controllers needs updating when program going on
     private TextArea taOrderMap = new TextArea();
@@ -134,7 +135,7 @@ public class PickerView  {
         taOrderDetail.setText(strOrderDetail);
         laDetailRootTitle.setText("Progressing Order Details");
     }
-    // added this
+    // used to register picker view, so that themetogglechanger can apply changes to it.
     public void registerWithToggle(){
         ThemeToggleChanger.registerPickerView(this);
     }

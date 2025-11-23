@@ -41,7 +41,7 @@ public class CustomerView  {
     private final int HEIGHT = UIStyle.customerWinHeight;
     private final int COLUMN_WIDTH = WIDTH / 2 - 10;
 
-    // make public from private
+    // change from private to public
     public HBox hbRoot; // Top-level layout manager
 
     private VBox vbTrolleyPage;  //vbTrolleyPage and vbReceiptPage will swap with each other when need
@@ -73,6 +73,7 @@ public class CustomerView  {
         lineContainer.setPrefWidth(4); // Give it some space
         lineContainer.setAlignment(Pos.CENTER);
 
+        // deleted HBox, as it is being called above
         hbRoot = new HBox(10, vbSearchPage, lineContainer, vbTrolleyPage); //initialize to show trolleyPage
         hbRoot.setAlignment(Pos.CENTER);
         hbRoot.setStyle(UIStyle.rootStyle);
@@ -255,7 +256,7 @@ public class CustomerView  {
                   viewWindow.getWidth(), viewWindow.getHeight());
     }
 
-    // added this
+    // used to register customer view, so that themetogglechanger can apply changes to it.
     public void registerWithToggle(){
         ThemeToggleChanger.registerCustomerView(this);
     }

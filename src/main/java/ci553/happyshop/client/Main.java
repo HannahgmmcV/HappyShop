@@ -61,9 +61,6 @@ public class Main extends Application {
 
         startEmergencyExit();
 
-        // had to comment out as these weren't working
-        //themeToggleChanger.start(new Stage());
-       // ThemeToggleChanger.start(new Stage());
         ThemeToggleChanger.openToggleWindow(); // Used to initialise the themetogglechanger class
     }
 
@@ -88,7 +85,8 @@ public class Main extends Application {
         cusModel.databaseRW = databaseRW;
         cusView.start(new Stage());
 
-        cusView.registerWithToggle(); // added this
+        // Register customer view so that themetogglechanger can apply theme updates when needed
+        cusView.registerWithToggle();
 
         //RemoveProductNotifier removeProductNotifier = new RemoveProductNotifier();
         //removeProductNotifier.cusView = cusView;
@@ -113,7 +111,8 @@ public class Main extends Application {
         pickerModel.registerWithOrderHub();
         pickerView.start(new Stage());
 
-        pickerView.registerWithToggle(); // added this
+        // Register picker view so that themetogglechanger can apply theme updates when needed
+        pickerView.registerWithToggle();
     }
 
     //The OrderTracker GUI - for customer to track their order's state(Ordered, Progressing, Collected)
@@ -123,7 +122,8 @@ public class Main extends Application {
         OrderTracker orderTracker = new OrderTracker();
         orderTracker.registerWithOrderHub();
 
-        orderTracker.registerWithToggle(); // added this
+        // Register order tracker so that themetogglechanger can apply theme updates when needed
+        orderTracker.registerWithToggle();
     }
 
     //initialize the orderMap<orderId, orderState> for OrderHub during system startup
@@ -154,7 +154,8 @@ public class Main extends Application {
         model.databaseRW = databaseRW;
         view.start(new Stage());
 
-        view.registerWithToggle(); // added this
+        // Register warehouse view so that themetogglechanger can apply theme updates when needed
+        view.registerWithToggle();
 
         //create dependent views that need window info
         HistoryWindow historyWindow = new HistoryWindow();
@@ -171,7 +172,8 @@ public class Main extends Application {
     private void startEmergencyExit(){
         EmergencyExit.getEmergencyExit();
 
-        EmergencyExit.getEmergencyExit().registerWithToggle(); // added this
+        // Register emergency exit so that themetogglechanger can apply theme updates when needed
+        EmergencyExit.getEmergencyExit().registerWithToggle();
     }
 }
 

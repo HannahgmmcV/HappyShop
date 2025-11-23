@@ -62,7 +62,7 @@ import javafx.scene.input.MouseEvent;
  */
 
 public class WarehouseView  {
-    public HBox hbRoot; // make public
+    public HBox hbRoot; // allows UIstyle to become public for themetogglechanger
 
     private final int WIDTH = UIStyle.warehouseWinWidth;
     private final int HEIGHT = UIStyle.warehouseWinHeight;
@@ -579,7 +579,7 @@ public class WarehouseView  {
                                 viewWindow.getHeight());
     }
 
-    // added this
+    // used to register warehouse view, so that themetogglechanger can apply changes to it.
     public void registerWithToggle(){
         ThemeToggleChanger.registerWarehouseView(this);
     }
