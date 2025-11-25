@@ -11,6 +11,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javafx.scene.control.Label;
+
 import java.util.ArrayList;
 
 public class ThemeToggleChanger extends Application {
@@ -23,11 +25,20 @@ public class ThemeToggleChanger extends Application {
     static ArrayList<OrderTracker> orderTrackerlist = new ArrayList<>();
     static ArrayList<EmergencyExit> emergencyExitlist = new ArrayList<>();
 
+    // Made private, so ensures it can’t be changed from outside ToggleThemeChanger
+    private boolean hintShown = true;
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Theme Toggle Window");
+        primaryStage.setTitle("Theme Toggle");
         Pane root = new Pane();
+
+        // Creates a hint label for dark mode
+        Label hintLabel = new Label("Try dark mode");
+        hintLabel.setLayoutX(80);
+        hintLabel.setLayoutY(40);
+        hintLabel.setStyle("-fx-text-fill: grey; -fx-font-size: 16px;");
+
 
         // Toggle button is used for switching back and forth between light and dark theme
         ToggleButton toggle = new ToggleButton("Light");
@@ -38,36 +49,46 @@ public class ThemeToggleChanger extends Application {
         // Use setOnAction and check isSelected() inside it
         toggle.setOnAction(event -> {
             if (toggle.isSelected()) { // if clicked, switch to dark theme.
+                /* disappears after the toggle button is clicked the first time to dark mode and
+                will not appear again until application is rerun
+                */
+                if (hintShown) {
+                    hintLabel.setVisible(false);
+                    hintShown = false;
+                }
+
                 toggle.setText("Dark");
+                toggle.setStyle("-fx-background-color: grey"); // changes the style colour of Dark button to differentiate from Light button
                 System.out.println("Dark mode ON"); // logs dark theme is ON
                 //Loop through the views and apply the dark background style to root container
                 // call your method to switch to dark theme
                 for(CustomerView cv: customerViewlist){
                     cv.hbRoot.setStyle("-fx-padding: 8px; " +
-                            "-fx-background-color: black");
+                            "-fx-background-color: #063840"); // find the colour for this
                 }
                 for(PickerView pv: pickerViewlist) {
                     pv.vbOrderMapRoot.setStyle("-fx-padding: 8px; " +
-                            "-fx-background-color: black");
+                            "-fx-background-color: #DAA520"); // find the colour for this
                     pv.vbOrderDetailRoot.setStyle("-fx-padding: 8px; " +
-                            "-fx-background-color: black");
+                            "-fx-background-color: #DAA520"); // find the colour for this
                 }
                 for(WarehouseView wv: warehouseViewlist){
                     wv.hbRoot.setStyle("-fx-padding: 8px; " +
-                            "-fx-background-color: black");
+                            "-fx-background-color: #FF1261"); // find the colour for this
                 }
                 for(OrderTracker ot: orderTrackerlist){
                     ot.vbox.setStyle("-fx-padding: 8px; " +
-                            "-fx-background-color: black");
+                            "-fx-background-color: #6E6E6E"); // find the colour for this
                 }
                 for(EmergencyExit ev: emergencyExitlist){
                     ev.borderPane.setStyle("-fx-padding: 8px; " +
-                            "-fx-background-color: black");
+                            "-fx-background-color: #006F6F"); // find the colour for this
                 }
 
             // If toggle button is not clicked, switch to light theme for all views
             } else {
                 toggle.setText("Light");
+                toggle.setStyle(""); // this allows the original light button to remain the same, when switching back and forth to Dark button
                 System.out.println("Light mode ON"); // logs light theme is ON
                 // call your method to switch to light theme
                 for(CustomerView cv: customerViewlist){
@@ -89,10 +110,9 @@ public class ThemeToggleChanger extends Application {
             }
         });
 
-        root.getChildren().add(toggle); // Adds toggle button to the root pane
+        root.getChildren().addAll(hintLabel, toggle); // Adds hintLabel and toggle button to the root pane
 
         Scene scene = new Scene(root, 300, 200);
-        //scene.getStylesheets().add("dark-theme.css");
 
         primaryStage.setScene(scene);
         WinPosManager.registerWindow(primaryStage, 300,200); //calculate position x and y for this window
