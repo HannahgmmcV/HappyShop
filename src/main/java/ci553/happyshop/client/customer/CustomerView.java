@@ -1,6 +1,6 @@
 package ci553.happyshop.client.customer;
 
-import ci553.happyshop.utility.ThemeToggleChanger; // added this
+import ci553.happyshop.utility.ThemeToggleChanger; // added
 import ci553.happyshop.utility.*;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;

@@ -2,7 +2,7 @@ package ci553.happyshop.client.warehouse;
 
 import ci553.happyshop.catalogue.Product;
 import ci553.happyshop.utility.ButtonSounds; // added
-import ci553.happyshop.utility.ThemeToggleChanger; // added this
+import ci553.happyshop.utility.ThemeToggleChanger; // added
 import ci553.happyshop.utility.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -144,7 +144,7 @@ public class WarehouseView  {
         lineContainer.setAlignment(Pos.CENTER);
 
         //top level layout manager
-        // had to delete HBox
+        // had to delete HBox, otherwise there would be a contradiction in calling the style
         hbRoot = new HBox(15, vbSearchPage, lineContainer, vbProductFormPage);
         hbRoot.setStyle(UIStyle.rootStyleWarehouse);
 

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
  * It is a singleton with static access, instantiation is restricted.
  */
 public class EmergencyExit {
+    // created from private to public
     public BorderPane borderPane= new BorderPane(); // allows UIstyle to become public for themetogglechanger
 
     private final int WIDTH = UIStyle.EmergencyExitWinWidth;
@@ -56,8 +57,6 @@ public class EmergencyExit {
             delay.play(); // Calls the delay to come into effect
         });
 
-        // moved uptop, underneath EmergencyExit
-        //BorderPane borderPane = new BorderPane();
         borderPane.setCenter(btnExit);
 
         borderPane.setStyle(UIStyle.rootStyle);

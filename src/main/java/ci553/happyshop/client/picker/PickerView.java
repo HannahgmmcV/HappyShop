@@ -1,7 +1,7 @@
 package ci553.happyshop.client.picker;
 
 import ci553.happyshop.utility.ButtonSounds; // added
-import ci553.happyshop.utility.ThemeToggleChanger; // added this
+import ci553.happyshop.utility.ThemeToggleChanger; // added
 import ci553.happyshop.utility.UIStyle;
 import ci553.happyshop.utility.WinPosManager;
 import javafx.event.ActionEvent;
