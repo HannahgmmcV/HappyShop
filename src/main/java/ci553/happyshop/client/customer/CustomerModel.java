@@ -25,45 +25,33 @@ public class CustomerModel {
     public CustomerView cusView;
     public DatabaseRW databaseRW; //Interface type, not specific implementation
                                   //Benefits: Flexibility: Easily change the database implementation.
+    // taken from warehouse model
+    private ArrayList<Product> productList = new ArrayList<>(); // search results fetched from the database
 
     private Product theProduct =null; // product found from search
     private ArrayList<Product> trolley =  new ArrayList<>(); // a list of products in trolley
 
-    // Four UI elements to be passed to CustomerView for display updates.
-    private String imageName = "imageHolder.jpg";                // Image to show in product preview (Search Page)
-    private String displayLaSearchResult = "No Product was searched yet"; // Label showing search result message (Search Page)
+    // now only two UI elements to be passed to CustomerView for display updates.
     private String displayTaTrolley = "";                                // Text area content showing current trolley items (Trolley Page)
     private String displayTaReceipt = "";                                // Text area content showing receipt after checkout (Receipt Page)
 
-    //SELECT productID, description, image, unitPrice,inStock quantity
-    void search() throws SQLException {
-        String productId = cusView.tfId.getText().trim();
-        if(!productId.isEmpty()){
-            theProduct = databaseRW.searchByProductId(productId); //search database
-            if(theProduct != null && theProduct.getStockQuantity()>0){
-                double unitPrice = theProduct.getUnitPrice();
-                String description = theProduct.getProductDescription();
-                int stock = theProduct.getStockQuantity();
+    // taken from warehouse model
+    void doSearch() throws SQLException {
 
-                String baseInfo = String.format("Product_Id: %s\n%s,\nPrice: £%.2f", productId, description, unitPrice);
-                String quantityInfo = stock < 100 ? String.format("\n%d units left.", stock) : "";
-                displayLaSearchResult = baseInfo + quantityInfo;
-                System.out.println(displayLaSearchResult);
-            }
-            else{
-                theProduct=null;
-                displayLaSearchResult = "No Product was found with ID " + productId;
-                System.out.println("No Product was found with ID " + productId);
-            }
-        }else{
-            theProduct=null;
-            displayLaSearchResult = "Please type ProductID";
-            System.out.println("Please type ProductID.");
+        String keyword = cusView.tfSearchKeyword.getText().trim();
+        if (!keyword.equals("")) {
+            productList = databaseRW.searchProduct(keyword);
+        }
+        else{
+            productList.clear();
+            System.out.println("please type product ID or name to search");
         }
         updateView();
     }
 
     void addToTrolley(){
+        // modified from warehouse model
+        theProduct = cusView.obrLvProducts.getSelectionModel().getSelectedItem();
         if(theProduct!= null){
 
             // trolley.add(theProduct) — Product is appended to the end of the trolley.
@@ -82,7 +70,6 @@ public class CustomerModel {
             displayTaTrolley = ProductListFormatter.buildString(trolley); //build a String for trolley so that we can show it
         }
         else{
-            displayLaSearchResult = "Please search for an available product before adding it to the trolley";
             System.out.println("must search and get an available product before add to trolley");
         }
         displayTaReceipt=""; // Clear receipt to switch back to trolleyPage (receipt shows only when not empty)
@@ -152,7 +139,6 @@ public class CustomerModel {
                 // 2. Trigger a message window to notify the customer about the insufficient stock, rather than directly changing displayLaSearchResult.
                 //You can use the provided RemoveProductNotifier class and its showRemovalMsg method for this purpose.
                 //remember close the message window where appropriate (using method closeNotifierWindow() of RemoveProductNotifier class)
-                displayLaSearchResult = "Checkout failed due to insufficient stock for the following products:\n" + errorMsg.toString();
                 System.out.println("stock is not enough");
             }
         }
@@ -188,23 +174,13 @@ public class CustomerModel {
         displayTaTrolley="";
         updateView();
     }
-    void closeReceipt(){
+    void closeReceipt() {
         displayTaReceipt="";
     }
 
+    // modified
     void updateView() {
-        if(theProduct != null){
-            imageName = theProduct.getProductImageName();
-            String relativeImageUrl = StorageLocation.imageFolder +imageName; //relative file path, eg images/0001.jpg
-            // Get the full absolute path to the image
-            Path imageFullPath = Paths.get(relativeImageUrl).toAbsolutePath();
-            imageName = imageFullPath.toUri().toString(); //get the image full Uri then convert to String
-            System.out.println("Image absolute path: " + imageFullPath); // Debugging to ensure path is correct
-        }
-        else{
-            imageName = "imageHolder.jpg";
-        }
-        cusView.update(imageName, displayLaSearchResult, displayTaTrolley,displayTaReceipt);
+        cusView.update(productList, displayTaTrolley,displayTaReceipt);
     }
      // extra notes:
      //Path.toUri(): Converts a Path object (a file or a directory path) to a URI object.
