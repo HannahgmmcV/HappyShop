@@ -36,6 +36,8 @@ import java.io.IOException;
  */
 
 public class Main extends Application {
+    // Create a ThemeToggleChanger to control theme toggling in the user interface.
+    ThemeToggleChanger themeToggleChanger = new ThemeToggleChanger(); // added here
 
     public static void main(String[] args) {
         launch(args); // Launches the JavaFX application and calls the @Override start()
@@ -61,7 +63,8 @@ public class Main extends Application {
 
         startEmergencyExit();
 
-        ThemeToggleChanger.openToggleWindow(); // Used to initialise the themetogglechanger class
+        themeToggleChanger.start(new Stage()); // Used to initialise the themetogglechanger class to UI for theme changing
+        // ThemeToggleChanger.openToggleWindow(); // commented out
     }
 
     /** The customer GUI -search prodduct, add to trolley, cancel/submit trolley, view receipt
@@ -79,10 +82,18 @@ public class Main extends Application {
         CustomerModel cusModel = new CustomerModel();
         DatabaseRW databaseRW = DatabaseRWFactory.createDatabaseRW();
 
+        // Create a new ExceptionWindow to use for displaying error dialogs for this customer.
+        ExceptionWindow exceptionWindow = new ExceptionWindow();
+
         cusView.cusController = cusController;
         cusController.cusModel = cusModel;
         cusModel.cusView = cusView;
         cusModel.databaseRW = databaseRW;
+
+        // Displays an error message for the customer for UnderMinimumPaymentException and ExceedMaximumQuantity
+        cusModel.exceptionWindow  = exceptionWindow;
+        // Initialise exceptionWindow so it knows which exception message to display or update when needed.
+        exceptionWindow.cusView = cusView;
         cusView.start(new Stage());
 
         // Register customer view so that themetogglechanger can apply theme updates when needed
