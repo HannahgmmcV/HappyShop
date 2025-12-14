@@ -25,6 +25,14 @@ import java.io.IOException;
  * The view switches to orderMapRoot for the next task after the order is prepared and collected by customer.
  */
 
+/**
+ * Buttons has a sound to it when clicked.
+ * Connects to themetogglechanger to change background from light to dark
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
+ */
+
 public class PickerView  {
     public PickerController pickerController;
 

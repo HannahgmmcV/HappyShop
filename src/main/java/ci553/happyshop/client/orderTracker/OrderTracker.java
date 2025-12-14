@@ -21,6 +21,13 @@ import java.util.TreeMap;
  * The ordersMap data is received from the OrderHub.
  */
 
+/**
+ * Connects to themetogglechanger to change background from light to dark
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
+ */
+
 public class OrderTracker {
     // created to change from private to public
     public VBox vbox;

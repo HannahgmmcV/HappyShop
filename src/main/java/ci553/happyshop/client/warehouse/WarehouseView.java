@@ -61,6 +61,14 @@ import javafx.scene.input.MouseEvent;
  *    - Only one VBox (EditChild or NewProChild) is active and visible at a time, depending on the selected action.
  */
 
+/**
+ * Buttons have sound to them when clicked.
+ * Connects to themetogglechanger to change background from light to dark
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
+ */
+
 public class WarehouseView  {
     public HBox hbRoot; // allows UIstyle to become public for themetogglechanger
 
@@ -583,29 +591,6 @@ public class WarehouseView  {
     public void registerWithToggle(){
         ThemeToggleChanger.registerWarehouseView(this);
     }
-
-    //   //another way to reset the editChild and NewProChild
-//   // remove the current one then recreate them and add them back
-//    //not use it in this version
-//    public void resetManageStockChild() {
-//        vbManagePage.getChildren().remove(1); // Remove the second child (editChild or addNewProChild)
-//
-//        //Decide which child to recreate and add back
-//        if (theManageType.equals("edit")) {
-//            vbEditProChild = editStockChild(); // Recreate the child
-//            vbManagePage.getChildren().add(vbEditProChild);
-//            proListView.requestFocus();
-//            imageSelectedEdit = false;//reset to false if the user canged image in previous editing
-//        }
-//        if (theManageType.equals("addNew")) {
-//            vbAddProChild = addNewProductToStockChild();  // Recreate the child
-//            vbManagePage.getChildren().add(vbAddProChild);
-//            tfIdNewPro.requestFocus();
-//            imageSelectedNewPro = false;
-//        }
-//    }
-
-//
 
 }
 

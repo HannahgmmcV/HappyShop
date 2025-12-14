@@ -8,15 +8,20 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This class provides a simple history window to display a list of events (successfully delete, edit and add a new product).
+ * This class provides a simple exception window to display a list of events (notes down under payments or over quantity of items).
  *
  * - The scene is created only once to avoid unnecessary scene recreation.
  * - The window is created only when needed. If the window is already visible, it will not be recreated.
- * - The history text is updated dynamically in the TextArea when new data is provided.
- * - The window is positioned relative to the warehouse window for a consistent UI experience.
+ * - The exception text is updated dynamically in the TextArea when new data is provided.
+ * - The window is positioned relative to the customer window for a consistent UI experience.
  *
- * This design ensures that the history view is efficient by not recreating the scene and only displaying the window when required.
+ * This design ensures that the exception view is efficient by not recreating the scene and only displaying the window when required.
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
  */
+
+
 
 public class ExceptionWindow {
     private static int WIDTH = UIStyle.HistoryWinWidth;

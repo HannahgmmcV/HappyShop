@@ -42,6 +42,15 @@ import java.sql.SQLException;
  *    depending on the current context. Only one of these is shown at a time.
  */
 
+/**
+ * Adds the ability to search a product by ID and Name.
+ * Buttons have sound to them when clicked.
+ * Connects to themetogglechanger to change background from light to dark
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
+ */
+
 public class CustomerView  {
     public CustomerController cusController;
 

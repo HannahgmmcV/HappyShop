@@ -17,6 +17,15 @@ import javafx.stage.Stage;
  * The class EmergencyExit used to immediately shut down the entire application.
  * It is a singleton with static access, instantiation is restricted.
  */
+
+/**
+ * Button has a unique sound to it when clicked.
+ * Connects to themetogglechanger to change background from light to dark
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
+ */
+
 public class EmergencyExit {
     // created from private to public
     public BorderPane borderPane= new BorderPane(); // allows UIstyle to become public for themetogglechanger

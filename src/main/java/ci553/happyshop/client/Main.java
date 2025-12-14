@@ -35,6 +35,14 @@ import java.io.IOException;
  * @author  Shine Shan University of Brighton
  */
 
+/**
+ * Added the ability to initialise themetogglechanger class, which allows the customer, warehouse, picker, order tracker
+ * and emergency to change background colours from light to dark.
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
+ */
+
 public class Main extends Application {
     // Create a ThemeToggleChanger to control theme toggling in the user interface.
     ThemeToggleChanger themeToggleChanger = new ThemeToggleChanger(); // added here
@@ -64,7 +72,6 @@ public class Main extends Application {
         startEmergencyExit();
 
         themeToggleChanger.start(new Stage()); // Used to initialise the themetogglechanger class to UI for theme changing
-        // ThemeToggleChanger.openToggleWindow(); // commented out
     }
 
     /** The customer GUI -search prodduct, add to trolley, cancel/submit trolley, view receipt
@@ -98,10 +105,6 @@ public class Main extends Application {
 
         // Register customer view so that themetogglechanger can apply theme updates when needed
         cusView.registerWithToggle();
-
-        //RemoveProductNotifier removeProductNotifier = new RemoveProductNotifier();
-        //removeProductNotifier.cusView = cusView;
-        //cusModel.removeProductNotifier = removeProductNotifier;
     }
 
     /** The picker GUI, - for staff to pack customer's order,

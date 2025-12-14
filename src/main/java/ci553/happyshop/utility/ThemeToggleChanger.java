@@ -15,6 +15,13 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
+/**
+ * Connects to customer, warehouse and picker view, plus order tracker and emergency exit to change background from light to dark
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
+ */
+
 public class ThemeToggleChanger extends Application {
 
     // Used an arrayList for all the different views to apply the theme changes dynamically

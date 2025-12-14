@@ -20,6 +20,15 @@ import java.util.Map;
  * You can either directly modify the CustomerModel class to implement the required tasks,
  * or create a subclass of CustomerModel and override specific methods where appropriate.
  */
+
+/**
+ * Parts of warehouse model added in order to search a product by name
+ * Throws an exception for under minimum payments and exceeded quantity amounts
+ *
+ * @version final edition
+ * @author Hannah Virgo University of Brighton
+ */
+
 public class CustomerModel {
     public CustomerView cusView;
     public DatabaseRW databaseRW; //Interface type, not specific implementation
@@ -116,13 +125,6 @@ public class CustomerModel {
                 if(!isItemQuantityValid()){
                     throw new ExceedMaximumQuantity("Exceed allowed quantity");
                 }
-                // Group the products in the trolley by productId to optimize stock checking
-                // Check the database for sufficient stock for all products in the trolley.
-                // If any products are insufficient, the update will be rolled back.
-                // If all products are sufficient, the database will be updated, and insufficientProducts will be empty.
-                // Note: If the trolley is already organized (merged and sorted), grouping is unnecessary.
-                //ArrayList<Product> groupedTrolley = groupProductsById(trolley);
-                //ArrayList<Product> insufficientProducts = databaseRW.purchaseStocks(groupedTrolley);
 
                 // Attempt to purchase stocks for items in trolley — insufficientProducts will list those that have failed
                 ArrayList<Product> insufficientProducts = databaseRW.purchaseStocks(trolley);

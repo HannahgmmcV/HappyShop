@@ -8,7 +8,7 @@ public class CustomerController {
 
     public void doAction(String action) throws SQLException, IOException {
         switch (action) {
-            case "🔍":
+            case "🔍": // added this search symbol from warehouse to make the search button look snazzy.
                 cusModel.doSearch();
                 break;
             case "Add to Trolley":
