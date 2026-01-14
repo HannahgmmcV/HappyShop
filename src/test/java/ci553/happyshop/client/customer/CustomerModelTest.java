@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Need to modify this.
+// JUnit test checks the makeOrgainsedTrolley method.
 class CustomerModelTest {
 
     @Test
